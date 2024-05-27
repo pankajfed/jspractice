@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+
+
+<body>
+    <!-- Problem statement: Fix the mathematical problem using js 
+    2+2 =22
+    -->
+ <p>2+2=22</p>
+
+<script>
+    let para = document.querySelector("p")
+    para.innerText = "2+2=4"
+</script>
+<!-- Problem statement: We have aHTML structure. we have one button to remove all. IF I click on task 1 fist will selete, if I click on second
+    second will rmeove.
+    
+-->
+<button id="removeAll"> Remove All</button>
+<button class="removeElement">Task 1</button>
+<button class="removeElement">Task 2</button>
+<button class="removeElement">Task 3</button>
+<button class="removeElement">Task 4</button>
+
+<script>
+let removeAll = document.querySelector("#removeAll");
+
+//to remove all elements
+removeAll.addEventListener('click', function(){
+    let restButton = document.querySelectorAll('.removeElement');
+    restButton.forEach(button => button.remove());
+});
+
+
+//to remove single emement
+let removesingle = document.querySelectorAll(".removeElement");
+removesingle.forEach(button=>
+    {
+    button.addEventListener('click', function(){
+        this.remove();
+});
+    });
+
+
+</script>
+ 
+
+    
+</body>
+</html>
