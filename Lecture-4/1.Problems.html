@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn-1">Say hello ID</button>
+    <!-- <button class="btn-2">Say hello class</button> -->
+
+    <script>
+        // On clicking the button append hello to the page
+
+        // Identify something in DOM
+        // getElementById
+        // getElementByClassName  
+        //==== The above two methids are not recommended======
+
+        // Better to use
+        // querySelector - It is the method in which you can pass anything to identify and this will identify for you.
+
+        // let btn = document.querySelector('#btn-1') // select and elemnt using query selector
+        // let btn1 = document.getElementById('btn-1') // select and elemnt using ID
+        //let btn2 = document.getElementsByClassName('btn-2') // select and elemnt using ID
+        // console.log("Getting selected by querySelector" ,btn)
+        // console.log("Getting selected by getElementById" ,btn1)
+        //console.log(btn2)
+
+         /*===   == EVENT LISTENERS ==
+         Event Listners= are those menthods which can register an event for an element so it can perform some tasks based on those events.
+            We have various addEventListner method to register an event for an Element.
+        =====*/
+
+        let btn = document.querySelector('#btn-1') // select and elemnt using ID
+        btn.addEventListener('click',function()
+        {
+            console.log("SINGLE ClICK")
+
+        }) // Event listner (click)
+
+        btn.addEventListener('dblclick',function()
+        {
+            console.log("DOUBLE ClICK")
+
+        }) // Event listner (dblclick)
+
+
+
+   
+
+
+    </script>
+
+    
+</body>
+</html>
