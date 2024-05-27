@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+<!-- Problem statement: Fix the list by inserting the missing element using <===[ querySelectorAll ]===> -->
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+
+    <script>
+
+        // querySelector('') Select only particuklar element
+        // querySelectorAll('') Select all elements
+        // Node list: Array like structure which will get add the elements of the same type inside
+        // a list and they will be indexed.
+        // [li,,li,li,li,]
+        // you can use  loop with Nodelist
+        // Array menthods andd properties will not work in Nodelist
+
+        // insertBefore(WhatToAdd,whereToAdd) 
+
+
+        let selectUL = document.querySelector('ul') // select only particular element
+        console.log(selectUL);
+
+        let selectLis = selectUL.querySelectorAll('li');// select all li's
+        console.log(selectLis);
+
+        let indexThathas8 = selectLis[6]
+
+        let createNewElement = document.createElement('li'); // Crete new li
+        createNewElement.innerHTML = "7";
+
+        selectUL.insertBefore(createNewElement,indexThathas8) // use insertBefore to insert element before specific element
+
+
+    </script>
+
+    
+</body>
+</html>
