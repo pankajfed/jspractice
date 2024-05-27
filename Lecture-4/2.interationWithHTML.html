@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn-1">Say hello ID</button>
+    <!-- <button class="btn-2">Say hello class</button> -->
+
+    <script>
+        let btn = document.querySelector('#btn-1');
+        
+        btn.addEventListener('click',function(){
+            let divElemt = document.createElement('div')
+            divElemt.innerText = "Hello";
+            let body = document.querySelector('body')
+            body.appendChild(divElemt)
+        });
+
+        
+    </script>
+
+    
+</body>
+</html>
