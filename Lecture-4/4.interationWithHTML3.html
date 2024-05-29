@@ -41,10 +41,12 @@ removeAll.addEventListener('click', function(){
 let removesingle = document.querySelectorAll(".removeElement");
 removesingle.forEach(button=>
     {
-    button.addEventListener('click', function(){
-        this.remove();
+    button.addEventListener('click', function(e){
+        e.currentTarget.remove();
+        // this.remove();
 });
     });
+
 
 
 </script>
