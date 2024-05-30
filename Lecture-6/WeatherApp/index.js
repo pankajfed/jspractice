@@ -33,9 +33,7 @@ async function fetchData(target)
   let conditonLogo = data.current.condition.icon
 
   updateWeatherData(locationName , currentTemp ,localTime , currentCondition , conditonLogo)
-
 }
-
 
 function updateWeatherData(cityName , temperature , time , currentCondition , conditonLogo){
   cityField.innerText = cityName
