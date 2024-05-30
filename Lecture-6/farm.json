@@ -1,0 +1,39 @@
+/*
+
+Difference B/w JSON and object
+
+JSON : 
+** In Json single quotes are not allowed
+** Keys should always be in single quotes
+
+
+Object:
+** In Object single quotes are allowed
+** Keys should not have quotes
+*/
+
+{
+  "farms": [
+    {
+      "name": "Farm1",
+      "products": ["Eggs", "Milk", "Cheese"],
+      "registrationNo": 12345,
+      "employee": 25,
+      "isOperating": true
+    },
+    {
+      "name": "Farm2",
+      "products": ["Eggs", "Milk", "Cheese"],
+      "registrationNo": 12365,
+      "employee": 30,
+      "isOperating": true
+    },
+    {
+      "name": "Farm3",
+      "products": ["Eggs", "Milk", "Cheese"],
+      "registrationNo": 52452,
+      "employee": 50,
+      "isOperating": true
+    }
+  ]
+}
