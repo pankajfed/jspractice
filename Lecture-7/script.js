@@ -23,6 +23,7 @@ let unlockClass = "fa-lock-open";
 
 let addTaskFlag = false;
 let removeTaskFlag = false;
+let ticketArr = [];
 
 let modal = addBtn.addEventListener("click", function () {
   addTaskFlag = !addTaskFlag; // true
@@ -49,7 +50,8 @@ let keyEvent = modalCont.addEventListener("keydown", function (e) {
   }
 });
 
-let createTicket = (textValue, modalPriorityClass) => {
+let createTicket = (textValue, modalPriorityClass ) => {
+  let id = shortid() // generate random IDs
   let ticketCont = document.createElement("div");
 
   ticketCont.setAttribute("class", "ticket-cont");
@@ -58,7 +60,7 @@ let createTicket = (textValue, modalPriorityClass) => {
         </div>
 
         <div class="ticket-id">
-           1234567
+           ${id}
         </div>
 
         <div class="ticket-task">
@@ -181,3 +183,23 @@ function handleColor(ticket)
 }
 
 // Filter tickets according to priority colors
+
+let allpriorityColors = document.querySelectorAll('.color-box')
+console.log(allpriorityColors)
+
+
+// Get tasks based on color filter
+
+for(let i=0; i<allpriorityColors.length; i++)
+  {
+    allpriorityColors[i].addEventListener('click',function(){
+      let selectedToolboxColor = allpriorityColors[i].classList[0]
+
+      let allTickets = document.querySelectorAll('.ticket-cont')
+      console.log(allTickets)
+      for(i=0; i<allTickets.length;i++) // to filter first rmove all the tickets
+        {
+          allTickets[i].remove()
+        }
+    })
+  }
