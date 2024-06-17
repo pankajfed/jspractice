@@ -50,12 +50,12 @@ let keyEvent = modalCont.addEventListener("keydown", function (e) {
   }
 });
 
-let createTicket = (textValue, modalPriorityClass ) => {
-  let id = shortid() // generate random IDs
+let createTicket = (textValue, ticketColorClass, ticketID ) => {
+  let id = ticketID || shortid() // generate random IDs
   let ticketCont = document.createElement("div");
 
   ticketCont.setAttribute("class", "ticket-cont");
-  ticketCont.innerHTML = `<div class="ticket-color ${modalPriorityClass}">
+  ticketCont.innerHTML = `<div class="ticket-color ${ticketColorClass}">
                
         </div>
 
@@ -78,6 +78,14 @@ let createTicket = (textValue, modalPriorityClass ) => {
   handleLock(ticketCont)
   handleRemoval(ticketCont)
   handleColor(ticketCont)
+
+  if(!ticketID)
+    {
+      ticketArr.push({ticketColorClass,textValue,ticketID:id})
+    }
+
+  
+  //console.log(ticketArr)
 };
 
 // Update color in a ticket
@@ -169,7 +177,7 @@ function handleColor(ticket)
    let currentcolorIndex = colors.findIndex(function(color){  // get index of color
     return currentcolor === color
    }) 
-   console.log(currentcolorIndex)
+   //console.log(currentcolorIndex)
 
   currentcolorIndex++
 
@@ -185,7 +193,7 @@ function handleColor(ticket)
 // Filter tickets according to priority colors
 
 let allpriorityColors = document.querySelectorAll('.color-box')
-console.log(allpriorityColors)
+//console.log(allpriorityColors)
 
 
 // Get tasks based on color filter
@@ -195,11 +203,21 @@ for(let i=0; i<allpriorityColors.length; i++)
     allpriorityColors[i].addEventListener('click',function(){
       let selectedToolboxColor = allpriorityColors[i].classList[0]
 
+      let filterTickets = ticketArr.filter(function(ticket){
+        return selectedToolboxColor === ticket.ticketColorClass
+      })
+      //console.log(filterTickets)
+
       let allTickets = document.querySelectorAll('.ticket-cont')
-      console.log(allTickets)
+      //console.log(allTickets)
       for(i=0; i<allTickets.length;i++) // to filter first rmove all the tickets
         {
           allTickets[i].remove()
         }
+        filterTickets.forEach(function(filterticket)
+        {
+          createTicket(filterticket.textValue, filterticket.ticketColorClass, filterticket.ticketID)
+        })
+        
     })
   }
