@@ -25,6 +25,17 @@ let addTaskFlag = false;
 let removeTaskFlag = false;
 let ticketArr = [];
 
+if(localStorage.getItem('tickets'))
+  {
+    ticketArr = JSON.parse(localStorage.getItem('tickets'))
+
+    ticketArr.forEach(function(ticket)
+        {
+          createTicket(ticket.textValue, ticket.ticketColorClass, ticket.ticketID)
+        })
+  }
+
+
 let modal = addBtn.addEventListener("click", function () {
   addTaskFlag = !addTaskFlag; // true
 
@@ -50,7 +61,7 @@ let keyEvent = modalCont.addEventListener("keydown", function (e) {
   }
 });
 
-let createTicket = (textValue, ticketColorClass, ticketID ) => {
+function createTicket(textValue, ticketColorClass, ticketID ) {
   let id = ticketID || shortid() // generate random IDs
   let ticketCont = document.createElement("div");
 
@@ -82,6 +93,7 @@ let createTicket = (textValue, ticketColorClass, ticketID ) => {
   if(!ticketID)
     {
       ticketArr.push({ticketColorClass,textValue,ticketID:id})
+      localStorage.setItem('tickets' ,JSON.stringify(ticketArr))
     }
 
   
@@ -110,7 +122,7 @@ selectedColor.forEach(function (colorElem) {
 
 // handle lock
 
-let handleLock = (ticket) => {
+function handleLock(ticket){
   let ticketLockelemnt = ticket.querySelector(".ticket-lock");
   let ticketLockIcon = ticketLockelemnt.children[0];
 
@@ -172,17 +184,17 @@ function handleColor(ticket)
 
   ticketColorBand.addEventListener('click',function(){
     let currentcolor = ticketColorBand.classList[1]
-   // console.log(currentcolor)
+   console.log(currentcolor)
 
    let currentcolorIndex = colors.findIndex(function(color){  // get index of color
     return currentcolor === color
    }) 
-   //console.log(currentcolorIndex)
+   console.log(currentcolorIndex)
 
   currentcolorIndex++
 
   
-  let newTicketColorValue = colors[newTicketColorIndex]
+  let newTicketColorValue = colors[currentcolorIndex]
 
   ticketColorBand.classList.remove(currentcolor)
   ticketColorBand.classList.add(newTicketColorValue)
@@ -221,3 +233,10 @@ for(let i=0; i<allpriorityColors.length; i++)
         
     })
   }
+
+  /* ======= LOCAL STORAGE=================*/
+   // Local Storage: Local Stortage is browers memory 
+  // Browser has 5MB of storage
+  // Storage data in the form of Key value pair i.e. object,JSON
+  
+   /* ======= INDEXED DB = DATABASE STORAGE IN WEBBROWSERS=================*/
