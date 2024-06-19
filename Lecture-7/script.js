@@ -86,14 +86,14 @@ function createTicket(textValue, ticketColorClass, ticketID ) {
   addTaskFlag = false;
   modalCont.style.display = "none";
 
-  handleLock(ticketCont)
+  handleLock(ticketCont,id)
   handleRemoval(ticketCont)
-  handleColor(ticketCont)
+  handleColor(ticketCont,id)
 
   if(!ticketID)
     {
-      ticketArr.push({ticketColorClass,textValue,ticketID:id})
-      localStorage.setItem('tickets' ,JSON.stringify(ticketArr))
+      ticketArr.push({textValue,ticketColorClass,ticketID:id})
+      localStorage.setItem('tickets' , JSON.stringify(ticketArr))
     }
 
   
@@ -122,14 +122,17 @@ selectedColor.forEach(function (colorElem) {
 
 // handle lock
 
-function handleLock(ticket){
+function handleLock(ticket , id){
   let ticketLockelemnt = ticket.querySelector(".ticket-lock");
   let ticketLockIcon = ticketLockelemnt.children[0];
 
   // ticket tasks area to edit content
   let ticketTaskArea= document.querySelector('.ticket-task')
 
-  ticketLockIcon.addEventListener("click", function () {
+ticketLockIcon.addEventListener("click", function(){
+    let ticketIdx = getIdx(id)
+    console.log(ticketIdx)
+
     if (ticketLockIcon.classList.contains(lockClass)) {
       ticketLockIcon.classList.remove(lockClass);
       ticketLockIcon.classList.add(unlockClass);
@@ -140,6 +143,9 @@ function handleLock(ticket){
       ticketLockIcon.classList.remove(unlockClass);
       ticketTaskArea.setAttribute('contenteditable','false')
     }
+
+    ticketArr[ticketIdx].textValue = ticketTaskArea.innerText
+    localStorage.setItem('tickets', JSON.stringify(ticketArr))
   });
 };
 
@@ -165,24 +171,30 @@ removeButton.addEventListener('click',function(){
 
 //Handle Removal of Tickets
 
-function handleRemoval(ticket)
+function handleRemoval(ticket,id)
 {
   ticket.addEventListener('click',function(){
+    
  
     if(!removeTaskFlag) return
+    let idx = getIdx(id)
       
     ticket.remove()
+    ticketArr.splice(idx,1)
+    
+  localStorage.setItem('tickets', JSON.stringify(ticketArr))
   })
 }
 
 
 // on click on color next colro with appear an dthsi will change infinitely
 
-function handleColor(ticket)
+function handleColor(ticket,id)
 {
   let ticketColorBand = ticket.querySelector('.ticket-color')
 
   ticketColorBand.addEventListener('click',function(){
+    let ticketIdx = getIdx(id)
     let currentcolor = ticketColorBand.classList[1]
    console.log(currentcolor)
 
@@ -199,7 +211,12 @@ function handleColor(ticket)
   ticketColorBand.classList.remove(currentcolor)
   ticketColorBand.classList.add(newTicketColorValue)
 
+  ticketArr[ticketIdx].ticketColorClass = newTicketColorValue
+  localStorage.setItem('tickets', JSON.stringify(ticketArr))
+
   })
+
+ 
 }
 
 // Filter tickets according to priority colors
@@ -240,3 +257,11 @@ for(let i=0; i<allpriorityColors.length; i++)
   // Storage data in the form of Key value pair i.e. object,JSON
   
    /* ======= INDEXED DB = DATABASE STORAGE IN WEBBROWSERS=================*/
+
+   function getIdx(id)
+   {
+    let ticketIdx = ticketArr.findIndex(function(ticketObj){
+      return ticketObj.ticketID === id
+    })
+    return ticketIdx
+   }
