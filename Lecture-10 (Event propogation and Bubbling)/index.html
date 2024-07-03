@@ -1,0 +1,43 @@
+<!-- Event Propogation == 
+ Propogation = Step by step transfer of anything  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        min-height:100px;
+        min-width:100px;
+        padding:20px;
+        border:2px Solid
+    }
+</style>
+<body>
+    <div class="grandparent">
+        <div class="parent">
+            <div class="child"></div>
+        </div>
+    </div>
+</body>
+<script>
+
+        let grandParent = document.querySelector('.grandparent')
+
+        grandParent.addEventListener('click',function(){
+            console.log('Grand parent id Clicked')
+        })
+
+        let Parent = document.querySelector('.parent')
+
+        Parent.addEventListener('click',function(){
+            console.log('Parent id Clicked')
+        })
+
+        // In this case when you click on any inside DiV, grandparent div is clicked because all inside divs are part of the grandparent div because all divs are inside the grandparent DIV.
+        // Rvery child component will respond to the parent component.
+
+</script>
+</html>
