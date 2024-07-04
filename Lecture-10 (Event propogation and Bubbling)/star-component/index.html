@@ -33,7 +33,6 @@
 <body>
     <div class="container">
         <h1>Star Component</h1>
-
         <div class="star-container">
             <span class="star" data-index="1">&#9733</span>
             <span class="star" data-index="2">&#9733</span>
@@ -41,54 +40,33 @@
             <span class="star" data-index="4">&#9733</span>
             <span class="star" data-index="5">&#9733</span>
         </div>
-
         <h1>Ratings Count <span id="count">0</span></h1>
-
-
-
     </div>
-
-
-
-
-
-    
 </body>
 
 
   <script>
 
-    let container = document.querySelector('.container')
-    let star = document.querySelectorAll('.star')
+let container = document.querySelector('.container')
+let AllStar = document.querySelectorAll('.star')
+// console.log(AllStar)
+let filled = 0;
 
-    let filled = 0
+container.addEventListener('click',function(e){
+    let currentClickedIndex = e.target.dataset.index
 
-    container.addEventListener('click' , function(e){
-        let currentClicked = e.target.dataset.index // 1
+    for(let i=0 ; i<filled ; i++){
+        AllStar[i].classList.remove('star-filled')
+     } 
+     for(let i=0 ; i<currentClickedIndex ; i++){
+        AllStar[i].classList.add('star-filled')
+    } 
 
-        for(let i=0 ; i<filled ; i++){
-            star[i].classList.remove('star-filled')
-        } // 2
+    filled = currentClickedIndex 
 
+    let count = document.querySelector("#count")
+    count.innerText = currentClickedIndex   
 
-        for(let i=0 ; i<currentClicked ; i++){
-            star[i].classList.add('star-filled')
-        } // 1
-
-
-        filled = currentClicked // 2
-
-
-       
-
-
-
-
-
-
-
-
-        
     })
 
 
