@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Comment class</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="comment-container">
+            <div class="all-comments">
+                <div class="card">
+                    <span class="text">First Commentor</span>
+                    <span id="reply" class="reply">Add Reply</span>
+                </div>
+            </div>
+       
+
+      <!-- <div class="comment-reply-section">
+          <input type="text" placeholder="Write your Reply" , class="input">
+          <button class="btn submit">Submit</button>
+      </div> -->
+    </div>
+     
+    </div>
+
+    <script>
+
+        let commentContainer = document.querySelector('.comment-container')
+
+        function createInputBox()
+        {
+            let createDiv = document.createElement('div')
+
+            createDiv.setAttribute('class' , 'comment-reply-section')
+            createDiv.innerHTML=`<input type="text" placeholder="Write your Reply" class="input">
+            <button class="btn submit">Submit</button>`
+
+          return createDiv
+        }
+
+        function addReply(text)
+        {
+            let createDiv1 = document.createElement('div')
+            createDiv1.setAttribute('class','all-comments')
+            createDiv1.innerHTML=`<div class="card">
+                    <span class="text">${text}</span>
+                    <span id="reply" class="reply">Add Reply</span>
+                </div>`
+
+            return createDiv1
+        }
+
+
+        commentContainer.addEventListener('click',function(e){
+            // console.log('clicked')
+            let replyBtnClicked = e.target.classList.contains('reply')
+            let submitBtnClicked = e.target.classList.contains('submit')
+            // console.log(replyBtnClicked)
+
+            let closestCard = e.target.closest('.all-comments')
+            if(replyBtnClicked === true)
+            {
+                closestCard.appendChild(createInputBox())  
+            }
+
+            if(submitBtnClicked === true)
+            {
+               
+                const commentClosest = e.target.closest('.comment-reply-section')
+
+                if(commentClosest.children[0].value)
+                {
+                    closestCard.appendChild(addReply(commentClosest.children[0].value))  
+                }
+                commentClosest.remove();
+            }
+            
+        })
+
+    </script>
+    
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
