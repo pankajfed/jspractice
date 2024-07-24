@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<button id="button"  onclick="stopAnimation()">
+    Stop event
+</button>    
+ <script>
+
+function printHello()
+{
+    alert("Hello")
+}
+
+// printHello();
+
+let id = setTimeout(printHello,2000)
+
+function stopAnimation()
+{
+    clearTimeout(id)
+    let innertct = document.querySelector('#button')
+    innertct.innerText = "Stopped"
+}
+
+ </script>   
+</body>
+</html>
