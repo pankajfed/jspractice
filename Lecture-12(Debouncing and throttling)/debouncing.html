@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dedouncing and Throttling</title>
+</head>
+<body>
+
+    <!--  =======================
+    Debouncing: It means delaying the requests.
+    Limiting the requests
+
+    Rate Limiting is a concept
+    ===================  -->
+
+    <input type="text">
+    <script>
+        let count = 0;
+        function work(){
+            console.log('Network Request', count)
+            count++
+        }
+        
+        // === Debouncing =====
+        // function debounce(work,delay)
+        // {
+        //     let timerId
+        //     return function optWorkfn(){
+
+        //         clearTimeout(timerId)
+        //         timerId = setTimeout(function(){
+        //             work()
+        //         },delay)
+        //     }
+        // }
+
+        //Throttling
+        function throttle(work,interval)
+        {
+            let flag = true
+            return function optWorkfn()
+            {
+                if(flag==true)
+            {
+                work();
+                flag= false
+                setTimeout(function(){
+                    flag=true;
+                },interval)
+            }
+               
+            }
+            
+        }
+
+
+        //Deboucing let optimizedFn = debounce(work,5000)
+
+        //Throttling
+        let optimizedFn = throttle(work,2000)
+
+
+        let inputField = document.querySelector('input')
+
+        inputField.addEventListener('keydown',optimizedFn)
+        
+    </script>
+    
+</body>
+</html>
